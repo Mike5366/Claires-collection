@@ -18,7 +18,7 @@ mongoose
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({ credentials: true, origin: true }));
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000!!");
