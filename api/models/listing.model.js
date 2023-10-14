@@ -10,6 +10,10 @@ const listingSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        inventory:{
+            type: Number,
+            required: true,
+        },
         unit:{
             type: String,
             required: true,
@@ -22,7 +26,7 @@ const listingSchema = new mongoose.Schema(
             type: Number,
             required: true,
         },
-        type:{
+        category:{
             type: String,
             required: true,
         },
