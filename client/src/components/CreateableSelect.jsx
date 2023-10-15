@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // import { Label } from 'react-dom';
-import CreatableSelect from 'react-select/creatable';
+import CreatableSelect from "react-select/creatable";
 import { productCategory } from "../profile/prodoctCategory.js";
 
 const createOption = (label) => ({
   label,
-  value: label.toLowerCase().replace(/\W/g, ''),
+  value: label.toLowerCase().replace(/\W/g, ""),
 });
 
 // interface State {
@@ -21,20 +21,17 @@ export default class CreatableAdvanced extends Component {
     value: undefined,
   };
 
-  handleChange = (newValue, actionMeta) => {
-    console.group('Value Changed');
-    console.log(newValue);
-    console.log(`action: ${actionMeta.action}`);
-    console.groupEnd();
+  handleChange = (newValue) => {
     this.setState({ value: newValue });
+    this.props.onData(newValue);
   };
 
   handleCreate = (inputValue) => {
     // We do not assume how users would like to add newly created options to the existing options list.
     // Instead we pass users through the new value in the onCreate prop
     this.setState({ isLoading: true });
-    console.group('Option created');
-    console.log('Wait a moment...');
+    console.group("Option created");
+    console.log("Wait a moment...");
     const { options } = this.state;
     const newOption = createOption(inputValue);
     console.log(newOption);
@@ -44,6 +41,7 @@ export default class CreatableAdvanced extends Component {
       options: [...options, newOption],
       value: newOption,
     });
+    this.props.onData(newOption);
   };
 
   render() {
@@ -51,7 +49,7 @@ export default class CreatableAdvanced extends Component {
     return (
       <>
         <CreatableSelect
-          inputId="productCategory"
+          inputId="category"
           isClearable
           isDisabled={isLoading}
           isLoading={isLoading}
