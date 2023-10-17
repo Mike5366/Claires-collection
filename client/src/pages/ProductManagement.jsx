@@ -38,6 +38,31 @@ export default function ProductManagement() {
     }
   };
 
+  const handleListingDelete = async (listingId) => {
+    try {
+      const res = await fetch(
+        `http://localhost:3000/api/listing/delete/${listingId}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+
+      setUserListings((prev) =>
+        prev.filter((listing) => listing._id !== listingId)
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <main className="p-3 max-w-4xl mx-auto">
       <div className="flex flex-col sm:flex-row gap-4">
@@ -56,7 +81,7 @@ export default function ProductManagement() {
                     <img
                       src={listing.imageUrls[0]}
                       alt="listing cover"
-                      className="w-15 h-15 object-contain rounded-lg"
+                      className="w-50 h-40 object-contain rounded-xl"
                     />
                   </Link>
                   <Link
@@ -69,7 +94,10 @@ export default function ProductManagement() {
                     <button className="bg-green-700 text-white uppercase rounded-xl p-3 hover:opacity-95">
                       Edit
                     </button>
-                    <button className="bg-red-700 text-white uppercase rounded-xl p-3 hover:opacity-95">
+                    <button
+                      onClick={() => handleListingDelete(listing._id)}
+                      className="bg-red-700 text-white uppercase rounded-xl p-3 hover:opacity-95"
+                    >
                       Delete
                     </button>
                   </div>
