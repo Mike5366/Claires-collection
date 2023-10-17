@@ -13,7 +13,7 @@ export default function ProductManagement() {
 
   const handleShowListings = async () => {
     try {
-      console.log(currentUser._id);
+      // console.log(currentUser._id);
       const res = await fetch(
         `http://localhost:3000/api/listing/user_listing/${currentUser._id}`,
         {
@@ -91,9 +91,11 @@ export default function ProductManagement() {
                     <p>{listing.name}</p>
                   </Link>
                   <div className="flex flex-col item-center gap-2 p-5">
-                    <button className="bg-green-700 text-white uppercase rounded-xl p-3 hover:opacity-95">
-                      Edit
-                    </button>
+                    <Link to={`/update-listing/${listing._id}`} className="flex flex-col">
+                      <button className="bg-green-700 text-white uppercase rounded-xl p-3 hover:opacity-95">
+                        Edit
+                      </button>
+                    </Link>
                     <button
                       onClick={() => handleListingDelete(listing._id)}
                       className="bg-red-700 text-white uppercase rounded-xl p-3 hover:opacity-95"
