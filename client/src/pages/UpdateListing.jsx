@@ -49,12 +49,12 @@ export default function UpdateListing() {
           console.log(data.message);
           return;
         }
-  
-        setFormData(data)
+
+        setFormData(data);
       } catch (error) {
         console.log(error.message);
       }
-    }
+    };
 
     fetchListing();
   }, []);
@@ -160,14 +160,17 @@ export default function UpdateListing() {
 
       setLoading(true);
       setError(false);
-      const res = await fetch(`http://localhost:3000/api/listing/update/${params.listingId}`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...formData, userRef: currentUser._id }),
-      });
+      const res = await fetch(
+        `http://localhost:3000/api/listing/update/${params.listingId}`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ...formData, userRef: currentUser._id }),
+        }
+      );
       const data = await res.json();
       setLoading(false);
       if (data.success === false) {
@@ -207,7 +210,10 @@ export default function UpdateListing() {
             onChange={handleChange}
             value={formData.description}
           />
-          <CreatableAdvanced onData={handleCreatableChange} />
+          <CreatableAdvanced
+            onChange={handleCreatableChange}
+            value={formData.category}
+          />
           <div className="flex gap-6 flex-wrap">
             <div className="flex gap-2">
               <input

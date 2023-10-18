@@ -1,64 +1,57 @@
-import React, { Component } from "react";
-// import { Label } from 'react-dom';
+import { useEffect, useState } from "react";
 import CreatableSelect from "react-select/creatable";
 import { productCategory } from "../profile/prodoctCategory.js";
 
 const createOption = (label) => ({
-  label,
+  label: label.toLowerCase().replace(/\W/g, ""),
   value: label.toLowerCase().replace(/\W/g, ""),
 });
 
-// interface State {
-//   isLoading: boolean;
-//   options: Array<{ label: string; value: string }>;
-//   value?: ValueType<OptionType>;
-// }
+export default function CreatableAdvanced(props) {
+  const [loading, setLoading] = useState(false);
+  const [options, setOptions] = useState(productCategory);
+  const [value, setValue] = useState(null);
 
-export default class CreatableAdvanced extends Component {
-  state = {
-    isLoading: false,
-    options: productCategory,
-    value: undefined,
+  useEffect(() => {
+    const getValue = () => {
+      if(props.value){
+        setValue(createOption(props.value));
+      }
+    };
+    getValue();
+  }, [props.value]);
+
+  const handleChange = (newValue) => {
+    setValue(newValue);
+    props.onChange(newValue);
   };
 
-  handleChange = (newValue) => {
-    this.setState({ value: newValue });
-    this.props.onData(newValue);
-  };
-
-  handleCreate = (inputValue) => {
+  const handleCreate = (inputValue) => {
     // We do not assume how users would like to add newly created options to the existing options list.
     // Instead we pass users through the new value in the onCreate prop
-    this.setState({ isLoading: true });
+    setLoading(true);
     console.group("Option created");
     console.log("Wait a moment...");
-    const { options } = this.state;
     const newOption = createOption(inputValue);
     console.log(newOption);
     console.groupEnd();
-    this.setState({
-      isLoading: false,
-      options: [...options, newOption],
-      value: newOption,
-    });
-    this.props.onData(newOption);
+    setLoading(false);
+    setOptions([...options, newOption]), setValue(newOption);
+    props.onChange(newOption);
   };
 
-  render() {
-    const { isLoading, options, value } = this.state;
-    return (
-      <>
-        <CreatableSelect
-          inputId="category"
-          isClearable
-          isDisabled={isLoading}
-          isLoading={isLoading}
-          onChange={this.handleChange}
-          onCreateOption={this.handleCreate}
-          options={options}
-          value={value}
-        />
-      </>
-    );
-  }
+  return (
+    <>
+      <CreatableSelect
+        inputId="category"
+        isClearable
+        isDisabled={loading}
+        isLoading={loading}
+        onChange={handleChange}
+        onCreateOption={handleCreate}
+        options={options}
+        value={value}
+      />
+    </>
+  );
 }
