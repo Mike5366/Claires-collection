@@ -4,13 +4,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
 import "swiper/css/bundle";
+import { FaMapMarkerAlt } from "react-icons/fa";
 
 export default function Listing() {
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const params = useParams();
-  console.log(listing);
+  // console.log(listing);
 
   useEffect(() => {
     SwiperCore.use([Navigation]);
@@ -54,7 +55,6 @@ export default function Listing() {
       )}
       {listing && !loading && !error && (
         <div>
-          {<p>{listing.name}</p>}
           <Swiper navigation>
             {listing.imageUrls.map((url) => (
               <SwiperSlide key={url}>
@@ -68,6 +68,35 @@ export default function Listing() {
               </SwiperSlide>
             ))}
           </Swiper>
+          <div className="p-3 max-w-3xl mx-auto">
+            <p className="text-2xl font-semibold p-3">
+              {listing.name} - {" $ "}
+              {listing.offer
+                ? listing.discountPrice.toLocaleString("en-US")
+                : listing.regularPrice.toLocaleString("en-US")}
+              {" / "}
+              {listing.unit}
+            </p>
+            <p className="flex item-center mt-6 p-2 text-slate-600 my-2 text-sm gap-1">
+              <FaMapMarkerAlt className="text-green-700" />
+              origin
+            </p>
+            <div className="flex item-center mt-6 p-2 gap-3">
+              <p className="bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
+                {listing.category}
+              </p>
+              {listing.offer && (
+                <p className="bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
+                  ${+listing.regularPrice - +listing.discountPrice}
+                  {" discount"}
+                </p>
+              )}
+            </div>
+            <p className="text-slate-800 p-2 gap-3">
+              <span className="font-semibold text-black">Description - </span>
+              {listing.description}
+            </p>
+          </div>
         </div>
       )}
     </main>
