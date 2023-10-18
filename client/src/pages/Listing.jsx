@@ -5,13 +5,14 @@ import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
 import "swiper/css/bundle";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 export default function Listing() {
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const params = useParams();
-  // console.log(listing);
+  const {currentUser} = useSelector((state) => state.user);
 
   useEffect(() => {
     SwiperCore.use([Navigation]);
@@ -68,7 +69,7 @@ export default function Listing() {
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className="p-3 max-w-3xl mx-auto">
+          <div className="flex flex-col p-3 max-w-3xl mx-auto">
             <p className="text-2xl font-semibold p-3">
               {listing.name} - {" $ "}
               {listing.offer
@@ -77,11 +78,11 @@ export default function Listing() {
               {" / "}
               {listing.unit}
             </p>
-            <p className="flex item-center mt-6 p-2 text-slate-600 my-2 text-sm gap-1">
+            <p className="flex item-center mt-6 p-2 text-slate-600 my-2 text-md gap-1">
               <FaMapMarkerAlt className="text-green-700" />
               origin
             </p>
-            <div className="flex item-center mt-6 p-2 gap-3">
+            <div className="flex item-center p-1 gap-3">
               <p className="bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
                 {listing.category}
               </p>
@@ -96,6 +97,13 @@ export default function Listing() {
               <span className="font-semibold text-black">Description - </span>
               {listing.description}
             </p>
+            {currentUser && currentUser.role === "user" && (
+              <div className="flex flex-col mt-6 p-2 gap-3">
+                <button className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3">
+                  Add to cart
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
