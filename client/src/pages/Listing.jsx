@@ -6,13 +6,15 @@ import { Navigation } from "swiper/modules";
 import "swiper/css/bundle";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import Contact from "../components/Contact";
 
 export default function Listing() {
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [contact, setContact] = useState(false);
   const params = useParams();
-  const {currentUser} = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
     SwiperCore.use([Navigation]);
@@ -69,7 +71,7 @@ export default function Listing() {
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className="flex flex-col p-3 max-w-3xl mx-auto">
+          <div className="flex flex-col p-3 max-w-2xl mx-auto">
             <p className="text-2xl font-semibold p-3">
               {listing.name} - {" $ "}
               {listing.offer
@@ -104,6 +106,21 @@ export default function Listing() {
                 </button>
               </div>
             )}
+
+            {currentUser && !contact && (
+              <div className="flex flex-col p-2 gap-3">
+                <button
+                  onClick={() => setContact(true)}
+                  className="bg-blue-700 text-white rounded-lg uppercase hover:opacity-95 p-3"
+                >
+                  Contact us
+                </button>
+              </div>
+            )}
+            {contact && (
+              <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
+            )}
+            {contact && <Contact listing={listing} />}
           </div>
         </div>
       )}
