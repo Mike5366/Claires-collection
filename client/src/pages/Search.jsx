@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { productCategory } from "../profile/prodoctCategory.js";
 import { sortCategory } from "../profile/sortCategory.js";
 import { useNavigate } from "react-router-dom";
+import ListingItem from "../components/ListingItem.jsx";
 
 export default function Search() {
   const [sideBarData, setSideBarData] = useState({
@@ -16,7 +17,7 @@ export default function Search() {
   const [listings, setListings] = useState([]);
   const [error, serError] = useState(false);
   const navigate = useNavigate();
-  console.log(listings);
+  //   console.log(listings);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -161,8 +162,19 @@ export default function Search() {
           </button>
         </form>
       </div>
-      <div className="text-3xl font-semibold border-b p-3 text-slate-700">
-        Listing results:
+      <div className="flex-1">
+        <h1 className="text-3xl font-semibold border-b p-3 text-slate-700">
+          Listing results:
+        </h1>
+        <div className="p-7 flex flex-wrap gap-4">
+          {!loading && listings.length === 0 && (
+            <p className="text-xl text-slate-700">No listing found!</p>
+          )}
+          {loading && (
+            <p className="text-xl text-slate-700 text-center w-full">Loading...</p>
+          )}
+          {!loading && listings && listings.map((listing) => (<ListingItem key={listing.id} listing={listing}/>))}
+        </div>
       </div>
     </div>
   );

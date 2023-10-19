@@ -153,6 +153,7 @@ export default function UpdateListing() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log(formData.regularPrice, formData.discountPrice);
       if (formData.regularPrice < formData.discountPrice)
         return setError("Discount price must be lower than regular price");
       if (formData.imageUrls.length < 1)
