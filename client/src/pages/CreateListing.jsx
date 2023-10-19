@@ -29,6 +29,7 @@ export default function CreateListing() {
   const [loading, setLoading] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  console.log(formData);
 
   const handleImageSubmit = (e) => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
@@ -102,14 +103,16 @@ export default function CreateListing() {
         [e.target.id]: e.target.checked,
       });
     }
-    if (
-      e.target.type === "number" ||
-      e.target.type === "text" ||
-      e.target.type === "textarea"
-    ) {
+    if (e.target.type === "text" || e.target.type === "textarea") {
       setFormData({
         ...formData,
         [e.target.id]: e.target.value,
+      });
+    }
+    if (e.target.type === "number") {
+      setFormData({
+        ...formData,
+        [e.target.id]: Number(e.target.value),
       });
     }
   };
@@ -124,10 +127,14 @@ export default function CreateListing() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (formData.regularPrice < formData.discountPrice)
+      console.log(formData.regularPrice, formData.discountPrice);
+      if (formData.regularPrice < formData.discountPrice) {
+        console.log(formData.regularPrice, formData.discountPrice);
         return setError("Discount price must be lower than regular price");
-      if (formData.imageUrls.length < 1)
+      }
+      if (formData.imageUrls.length < 1) {
         return setError("You must upload at leat one image");
+      }
 
       setLoading(true);
       setError(false);

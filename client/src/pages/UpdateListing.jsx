@@ -131,14 +131,17 @@ export default function UpdateListing() {
         [e.target.id]: e.target.checked,
       });
     }
-    if (
-      e.target.type === "number" ||
-      e.target.type === "text" ||
-      e.target.type === "textarea"
-    ) {
+    if (e.target.type === "text" || e.target.type === "textarea") {
       setFormData({
         ...formData,
         [e.target.id]: e.target.value,
+      });
+    }
+
+    if (e.target.type === "number") {
+      setFormData({
+        ...formData,
+        [e.target.id]: Number(e.target.value),
       });
     }
   };
