@@ -134,87 +134,93 @@ export default function Profile() {
   };
 
   return (
-    <div className="='p-3 max-w-lg mx-auto">
-      <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <input
-          onChange={(e) => setFile(e.target.files[0])}
-          type="file"
-          ref={fileRef}
-          hidden
-          accept="image/*"
-        />
-        <img
-          onClick={() => fileRef.current.click()}
-          src={formData.avatar || currentUser.avatar}
-          alt="profile"
-          className="rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2"
-        />
-        <p className="text-sm self-center">
-          {fileUploadError ? (
-            <span className="text-red-700">
-              Error Image Upload(image must be less than 2MB)
-            </span>
-          ) : filePerc > 0 && filePerc < 100 ? (
-            <span className="text-slate-700">{"Uploading $ {filePerc}%"}</span>
-          ) : filePerc === 100 ? (
-            <span className="text-green-700">Image successfully uploaded!</span>
-          ) : (
-            ""
-          )}
-        </p>
-        <input
-          type="text"
-          placeholder="userName"
-          defaultValue={currentUser.username}
-          id="username"
-          className="=border p-3 rounded-lg"
-          onChange={handleChange}
-        />
-        <input
-          type="email"
-          placeholder="email"
-          defaultValue={currentUser.email}
-          id="email"
-          className="=border p-3 rounded-lg"
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          id="password"
-          className="=border p-3 rounded-lg"
-          onChange={handleChange}
-        />
-        <button
-          disabled={loading}
-          className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80"
-        >
-          {loading ? "Loading..." : "Update"}
-        </button>
-        <Link
-          className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
-          to={"/product-management"}
-        >
-          Product Management
-        </Link>
-      </form>
-      <div className="flex justify-between mt-5">
-        <span
-          onClick={handleDeleteUser}
-          className="text-red-700 cursor-pointer"
-        >
-          Delete account
-        </span>
-        <span onClick={handleSignOut} className="text-red-700 cursor-pointer">
-          Sign out
-        </span>
-      </div>
+    <div className="p-5 my-5 max-w-lg mx-auto">
+      <div className="p-10 my-5 rounded-3xl bg-white shadow-2xl shadow-slate-700">
+        <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <input
+            onChange={(e) => setFile(e.target.files[0])}
+            type="file"
+            ref={fileRef}
+            hidden
+            accept="image/*"
+          />
+          <img
+            onClick={() => fileRef.current.click()}
+            src={formData.avatar || currentUser.avatar}
+            alt="profile"
+            className="rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2"
+          />
+          <p className="text-sm self-center">
+            {fileUploadError ? (
+              <span className="text-red-700">
+                Error Image Upload(image must be less than 2MB)
+              </span>
+            ) : filePerc > 0 && filePerc < 100 ? (
+              <span className="text-slate-700">
+                {"Uploading $ {filePerc}%"}
+              </span>
+            ) : filePerc === 100 ? (
+              <span className="text-green-700">
+                Image successfully uploaded!
+              </span>
+            ) : (
+              ""
+            )}
+          </p>
+          <input
+            type="text"
+            placeholder="userName"
+            defaultValue={currentUser.username}
+            id="username"
+            className="=border-4 border-slate-900 p-3 rounded-lg"
+            onChange={handleChange}
+          />
+          <input
+            type="email"
+            placeholder="email"
+            defaultValue={currentUser.email}
+            id="email"
+            className="=border p-3 rounded-lg"
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            id="password"
+            className="=border p-3 rounded-lg"
+            onChange={handleChange}
+          />
+          <button
+            disabled={loading}
+            className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80"
+          >
+            {loading ? "Loading..." : "Update"}
+          </button>
+          <Link
+            className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
+            to={"/product-management"}
+          >
+            Product Management
+          </Link>
+        </form>
+        <div className="flex justify-between mt-5">
+          <span
+            onClick={handleDeleteUser}
+            className="text-red-700 cursor-pointer"
+          >
+            Delete account
+          </span>
+          <span onClick={handleSignOut} className="text-red-700 cursor-pointer">
+            Sign out
+          </span>
+        </div>
 
-      <p className="text-red-700 mt-5">{error ? error : ""}</p>
-      <p className="text-green-700 mt-5">
-        {updateSuccess ? "User is updated successfully!" : ""}
-      </p>
+        <p className="text-red-700 mt-5">{error ? error : ""}</p>
+        <p className="text-green-700 mt-5">
+          {updateSuccess ? "User is updated successfully!" : ""}
+        </p>
+      </div>
     </div>
   );
 }
