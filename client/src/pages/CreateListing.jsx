@@ -178,7 +178,7 @@ export default function CreateListing() {
             onChange={handleChange}
             value={formData.description}
           />
-          <CreatableAdvanced onData={handleCreatableChange} />
+          <CreatableAdvanced onChange={handleCreatableChange} />
           <div className="flex gap-6 flex-wrap">
             <div className="flex gap-2">
               <input

@@ -1,5 +1,6 @@
 export const productCategory = [
-  { label: 'seafood', value: 'seafood' },
-  { label: 'meat', value: 'meat' },
-  { label: 'vegetable', value: 'vegetable' },
+  { label: 'All', value:'all'},
+  { label: 'Seafood', value: 'seafood' },
+  { label: 'Meat', value: 'meat' },
+  { label: 'Vegetable', value: 'vegetable' },
 ];
