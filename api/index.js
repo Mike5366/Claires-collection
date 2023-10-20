@@ -23,7 +23,10 @@ const __dirname = path.resolve();
 const app = express();
 
 app.use(express.json());
-app.use(cors({ credentials: true, origin: true }));
+var corsOptions = {
+  origin: ['https://mikie-e-commerce.onrender.com','http://localhost:5173'],
+  credentials: true };
+app.use(cors(corsOptions));
 app.use(coodkieParser());
 
 app.listen(3000, () => {
