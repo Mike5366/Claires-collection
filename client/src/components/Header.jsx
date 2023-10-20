@@ -2,6 +2,8 @@ import { FaSearch } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { AiFillHome, AiFillInfoCircle } from "react-icons/ai";
+import { FaShoppingCart } from "react-icons/fa";
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
@@ -18,18 +20,18 @@ export default function Header() {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    const searchTermFromUrl = urlParams.get('searchTerm');
-    if(searchTermFromUrl){
-      setSearchTerm(searchTermFromUrl)
+    const searchTermFromUrl = urlParams.get("searchTerm");
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
     }
-  }, [location.search])
+  }, [location.search]);
 
   return (
     <header className="bg-slate-200 shadow-md">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
         <Link to="/">
           <h1 className="front-bold text-sm sm:text-xl flex flex-wrap">
-            <span className="text-slate-500"> Mike </span>
+            <span className="text-slate-500"> Mikie </span>
             <span className="text-slate-700"> E-commerce</span>
           </h1>
         </Link>
@@ -48,16 +50,17 @@ export default function Header() {
             <FaSearch className="text-slate-600" />
           </button>
         </form>
-        <ul className="flex gap-4">
+        <ul className="flex gap-6">
           <Link to="/">
-            <li className="hidden sm:inline text-slate-700 hover:underline">
-              Home
+            <li>
+              <AiFillHome className="hidden md:inline text-slate-700 hover:opacity-95 text-2xl" />
             </li>
           </Link>
           <Link to="/about">
-            <li className="hidden sm:inline text-slate-700 hover:underline">
-              About
-            </li>
+            <AiFillInfoCircle className="hidden md:inline text-slate-700 hover:opacity-95 text-2xl" />
+          </Link>
+          <Link to="/">
+            <FaShoppingCart className="text-slate-700 hover:opacity-95 text-2xl" />
           </Link>
           <Link to="/profile">
             {currentUser ? (

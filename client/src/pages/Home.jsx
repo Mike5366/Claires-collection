@@ -111,7 +111,7 @@ export default function Home() {
       </div>
 
       {/* swiper */}
-      <Swiper autoplay={{ delay: 4000 }} pagination>
+      <Swiper autoplay={{ delay: 4000 }}>
         {offerListings &&
           offerListings.length > 0 &&
           offerListings.map((listing) => (
