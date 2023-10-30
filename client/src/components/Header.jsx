@@ -59,9 +59,9 @@ export default function Header() {
           <Link to="/about">
             <AiFillInfoCircle className="hidden md:inline text-slate-700 hover:opacity-95 text-2xl" />
           </Link>
-          <Link to="/">
+          {/* <Link to="/">
             <FaShoppingCart className="text-slate-700 hover:opacity-95 text-2xl" />
-          </Link>
+          </Link> */}
           <Link to="/profile">
             {currentUser ? (
               <img

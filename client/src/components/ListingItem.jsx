@@ -19,10 +19,10 @@ export default function ListingItem({ listing }) {
             <MdLocationOn className="h-4 w-4 text-green-700" />
             <p className="text-sm text-gray-600 truncate">origin</p>
           </div>
-          <p className="text-sm text-gray-600 line-clamp-2">
+          <p className="text-sm text-gray-600 line-clamp-2 h-11">
             {listing.description}
           </p>
-          <div className="flex">
+          <div className="flex h-10">
             <div>
               <p>
                 {/* {!listing.offer && listing.regularPrice} */}

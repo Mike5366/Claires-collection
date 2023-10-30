@@ -6,11 +6,17 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        target: 'https://mikie-e-commerce.onrender.com',
         changeOrigin: true,
         secure: false,
-        rewrite: path => path.replace('/api', ''),
+        rewrite: (path) => path.replace('/^\/api/', ''),
       },
+      // '/api': {
+      //   target: 'http://localhost:3000',
+      //   changeOrigin: true,
+      //   secure: false,
+      //   rewrite: path => path.replace('/^\/api/', ''),
+      // },
     },
   },
 

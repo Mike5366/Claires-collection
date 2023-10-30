@@ -71,7 +71,7 @@ export default function Profile() {
     try {
       dispatch(updateUserStart());
       const res = await fetch(
-        `http://localhost:3000/api/user/update/${currentUser._id}`,
+        `/api/user/update/${currentUser._id}`,
         {
           method: "POST",
           credentials: "include",
@@ -98,7 +98,7 @@ export default function Profile() {
     try {
       dispatch(deleteUserStart());
       const res = await fetch(
-        `http://localhost:3000/api/user/delete/${currentUser._id}`,
+        `/api/user/delete/${currentUser._id}`,
         {
           method: "DELETE",
           credentials: "include",
@@ -118,7 +118,7 @@ export default function Profile() {
   const handleSignOut = async () => {
     try {
       dispatch(signOutStart());
-      const res = await fetch(`http://localhost:3000/api/auth/signout`, {
+      const res = await fetch(`/api/auth/signout`, {
         method: "GET",
         credentials: "include",
       });

@@ -19,7 +19,6 @@ export default function Search() {
   const [error, serError] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const navigate = useNavigate();
-  console.log(hasMore);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -51,7 +50,7 @@ export default function Search() {
         setHasMore(true);
         const searchQuery = urlParams.toString();
         const res = await fetch(
-          `http://localhost:3000/api/listing/get?${searchQuery}`
+          `/api/listing/get?${searchQuery}`
         );
         const data = await res.json();
         if (data.success === false) {
@@ -123,11 +122,10 @@ export default function Search() {
     urlParams.set("startIndex", startIndex);
     const searchQuery = urlParams.toString();
     const res = await fetch(
-      `http://localhost:3000/api/listing/get?${searchQuery}`
+      `/api/listing/get?${searchQuery}`
     );
     const data = await res.json();
     if (data.length < 9) {
-      console.log(hasMore);
       setHasMore(false);
     }
 

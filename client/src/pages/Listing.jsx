@@ -13,6 +13,7 @@ export default function Listing() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [contact, setContact] = useState(false);
+  const [copied, setCopied] = useState(false);
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
 
@@ -22,7 +23,7 @@ export default function Listing() {
       try {
         setLoading(true);
         const res = await fetch(
-          `http://localhost:3000/api/listing/get/${params.listingId}`,
+          `/api/listing/get/${params.listingId}`,
           {
             method: "GET",
             credentials: "include",
@@ -99,14 +100,14 @@ export default function Listing() {
               <span className="font-semibold text-black">Description - </span>
               {listing.description}
             </p>
-            {currentUser && currentUser.role === "user" && (
+            {/* {currentUser && currentUser.role === "user" && (
               <div className="flex flex-col mt-6 p-2 gap-3">
                 <button className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3">
                   Add to cart
                 </button>
               </div>
-            )}
-
+            )} */}
+{/* currentUser._id !== listing.userRef && */}
             {currentUser && !contact && (
               <div className="flex flex-col p-2 gap-3">
                 <button

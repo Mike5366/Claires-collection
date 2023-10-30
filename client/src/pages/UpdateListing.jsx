@@ -35,7 +35,7 @@ export default function UpdateListing() {
     const fetchListing = async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/api/listing/get/${params.listingId}`,
+          `/api/listing/get/${params.listingId}`,
           {
             method: "GET",
             credentials: "include",
@@ -165,7 +165,7 @@ export default function UpdateListing() {
       setLoading(true);
       setError(false);
       const res = await fetch(
-        `http://localhost:3000/api/listing/update/${params.listingId}`,
+        `/api/listing/update/${params.listingId}`,
         {
           method: "POST",
           credentials: "include",

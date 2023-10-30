@@ -138,7 +138,7 @@ export default function CreateListing() {
 
       setLoading(true);
       setError(false);
-      const res = await fetch("http://localhost:3000/api/listing/create", {
+      const res = await fetch("/api/listing/create", {
         method: "POST",
         credentials: "include",
         headers: {

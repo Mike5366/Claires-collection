@@ -11,7 +11,6 @@ export const createListing = async (req, res, next) => {
 };
 
 export const getUserListing = async (req, res, next) => {
-  console.log(req);
   if (req.user.id !== req.params.id)
     return next(errorHandler(401, "You can only view your own listings!"));
   try {
@@ -69,7 +68,7 @@ export const getListings = async (req, res, next) => {
     const limit = parseInt(req.query.limit) || 9;
     const startIndex = parseInt(req.query.startIndex) || 0;
     let offer = req.query.offer;
-    console.log(startIndex);
+    
 
     if (offer === undefined || offer === "false") {
       offer = { $in: [false, true] };

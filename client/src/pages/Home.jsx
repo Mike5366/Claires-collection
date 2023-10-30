@@ -38,7 +38,7 @@ export default function Home() {
     const fetchOfferListings = async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/api/listing/get?offer=true&limit=4`
+          `/api/listing/get?offer=true&limit=4`
         );
         const data = await res.json();
         setOfferListings(data);
@@ -51,7 +51,7 @@ export default function Home() {
     const fetchSeafoodListings = async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/api/listing/get?category=seafood&limit=4`
+          `/api/listing/get?category=seafood&limit=4`
         );
         const data = await res.json();
         setSeafoodListings(data);
@@ -64,7 +64,7 @@ export default function Home() {
     const fetchMeatListings = async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/api/listing/get?category=meat&limit=4`
+          `/api/listing/get?category=meat&limit=4`
         );
         const data = await res.json();
         setMeatListings(data);
@@ -77,7 +77,7 @@ export default function Home() {
     const fetchVegetableListings = async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/api/listing/get?category=vegetable&limit=4`
+          `/api/listing/get?category=vegetable&limit=4`
         );
         const data = await res.json();
         setVegetableListings(data);

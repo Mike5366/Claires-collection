@@ -15,7 +15,7 @@ export default function ProductManagement() {
     try {
       // console.log(currentUser._id);
       const res = await fetch(
-        `http://localhost:3000/api/listing/user_listing/${currentUser._id}`,
+        `/api/listing/user_listing/${currentUser._id}`,
         {
           method: "GET",
           credentials: "include",
@@ -41,7 +41,7 @@ export default function ProductManagement() {
   const handleListingDelete = async (listingId) => {
     try {
       const res = await fetch(
-        `http://localhost:3000/api/listing/delete/${listingId}`,
+        `/api/listing/delete/${listingId}`,
         {
           method: "DELETE",
           credentials: "include",
