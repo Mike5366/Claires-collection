@@ -81,10 +81,10 @@ export default function Listing() {
               {" / "}
               {listing.unit}
             </p>
-            <p className="flex item-center mt-6 p-2 text-slate-600 my-2 text-md gap-1">
+            {/* <p className="flex item-center mt-6 p-2 text-slate-600 my-2 text-md gap-1">
               <FaMapMarkerAlt className="text-green-700" />
               origin
-            </p>
+            </p> */}
             <div className="flex item-center p-1 gap-3">
               <p className="bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
                 {listing.category}
