@@ -1,5 +1,7 @@
 import { useState } from "react";
-import CreatableAdvanced from "../components/CreateableSelect";
+import Select from "react-select";
+// import CreatableAdvanced from "../components/CreateableSelect";
+import { productCategory } from "../profile/prodoctCategory.js";
 import {
   getStorage,
   uploadBytesResumable,
@@ -117,11 +119,14 @@ export default function CreateListing() {
     }
   };
 
-  const handleCreatableChange = (e) => {
-    setFormData({
-      ...formData,
-      category: e ? e.value : "",
-    });
+  // const handleCreatableChange = (e) => {
+  //   setFormData({
+  //     ...formData,
+  //     category: e ? e.value : "",
+  //   });
+  // };
+  const handleCategoryChange = (e) => {
+    setFormData({ ...formData, category: e.value });
   };
 
   const handleSubmit = async (e) => {
@@ -185,7 +190,14 @@ export default function CreateListing() {
             onChange={handleChange}
             value={formData.description}
           />
-          <CreatableAdvanced onChange={handleCreatableChange} />
+          {/* <CreatableAdvanced onChange={handleCreatableChange} /> */}
+          <Select
+            id="category"
+            className=""
+            options={productCategory}
+            onChange={handleCategoryChange}
+            value={productCategory.filter((e) => e.value === formData.category)}
+          />
           <div className="flex gap-6 flex-wrap">
             <div className="flex gap-2">
               <input

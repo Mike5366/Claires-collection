@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import CreatableAdvanced from "../components/CreateableSelect";
+import Select from "react-select";
+// import CreatableAdvanced from "../components/CreateableSelect";
+import { productCategory } from "../profile/prodoctCategory.js";
 import {
   getStorage,
   uploadBytesResumable,
@@ -34,16 +36,13 @@ export default function UpdateListing() {
   useEffect(() => {
     const fetchListing = async () => {
       try {
-        const res = await fetch(
-          `/api/listing/get/${params.listingId}`,
-          {
-            method: "GET",
-            credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const res = await fetch(`/api/listing/get/${params.listingId}`, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         const data = await res.json();
         if (data.success === false) {
           console.log(data.message);
@@ -146,11 +145,14 @@ export default function UpdateListing() {
     }
   };
 
-  const handleCreatableChange = (e) => {
-    setFormData({
-      ...formData,
-      category: e ? e.value : "",
-    });
+  // const handleCreatableChange = (e) => {
+  //   setFormData({
+  //     ...formData,
+  //     category: e ? e.value : "",
+  //   });
+  // };
+  const handleCategoryChange = (e) => {
+    setFormData({ ...formData, category: e.value });
   };
 
   const handleSubmit = async (e) => {
@@ -164,17 +166,14 @@ export default function UpdateListing() {
 
       setLoading(true);
       setError(false);
-      const res = await fetch(
-        `/api/listing/update/${params.listingId}`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ ...formData, userRef: currentUser._id }),
-        }
-      );
+      const res = await fetch(`/api/listing/update/${params.listingId}`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...formData, userRef: currentUser._id }),
+      });
       const data = await res.json();
       setLoading(false);
       if (data.success === false) {
@@ -214,9 +213,16 @@ export default function UpdateListing() {
             onChange={handleChange}
             value={formData.description}
           />
-          <CreatableAdvanced
+          {/* <CreatableAdvanced
             onChange={handleCreatableChange}
             value={formData.category}
+          /> */}
+          <Select
+            id="category"
+            className=""
+            options={productCategory}
+            onChange={handleCategoryChange}
+            value={productCategory.filter((e) => e.value === formData.category)}
           />
           <div className="flex gap-6 flex-wrap">
             <div className="flex gap-2">

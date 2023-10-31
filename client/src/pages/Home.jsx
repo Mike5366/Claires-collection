@@ -28,11 +28,14 @@ export default function Home() {
   };
 
   const [offerListings, setOfferListings] = useState([]);
-  const [seaFoodListings, setSeafoodListings] = useState([]);
-  const [meatListings, setMeatListings] = useState([]);
-  const [vegetableListings, setVegetableListings] = useState([]);
+  const [dessertListings, setDessertListings] = useState([]);
+  const [dishListings, setDishListings] = useState([]);
+  const [soapListings, setSoapListings] = useState([]);
+  const [lipBalmListings, setLipBalmListings] = useState([]);
+  const [potteryListings, setPotteryListings] = useState([]);
+  const [bagListings, setBagListings] = useState([]);
+
   SwiperCore.use([Navigation, Pagination, Autoplay]);
-  console.log(meatListings);
 
   useEffect(() => {
     const fetchOfferListings = async () => {
@@ -42,45 +45,84 @@ export default function Home() {
         );
         const data = await res.json();
         setOfferListings(data);
-        fetchSeafoodListings();
+        fetchDessertListings();
       } catch (error) {
         console.log(error);
       }
     };
 
-    const fetchSeafoodListings = async () => {
+    const fetchDessertListings = async () => {
       try {
         const res = await fetch(
-          `/api/listing/get?category=seafood&limit=4`
+          `/api/listing/get?category=dessert&limit=4`
         );
         const data = await res.json();
-        setSeafoodListings(data);
-        fetchMeatListings();
+        setDessertListings(data);
+        fetchDishListings();
       } catch (error) {
         console.log(error);
       }
     };
 
-    const fetchMeatListings = async () => {
+    const fetchDishListings = async () => {
       try {
         const res = await fetch(
-          `/api/listing/get?category=meat&limit=4`
+          `/api/listing/get?category=dish&limit=4`
         );
         const data = await res.json();
-        setMeatListings(data);
-        fetchVegetableListings();
+        setDishListings(data);
+        fetchSoapListings();
       } catch (error) {
         console.log(error);
       }
     };
 
-    const fetchVegetableListings = async () => {
+    const fetchSoapListings = async () => {
       try {
         const res = await fetch(
-          `/api/listing/get?category=vegetable&limit=4`
+          `/api/listing/get?category=soap&limit=4`
         );
         const data = await res.json();
-        setVegetableListings(data);
+        setSoapListings(data);
+        fetchLipBalmListings();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const fetchLipBalmListings = async () => {
+      try {
+        const res = await fetch(
+          `/api/listing/get?category=lipbalm&limit=4`
+        );
+        const data = await res.json();
+        setLipBalmListings(data);
+        fetchPotteryListings();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const fetchPotteryListings = async () => {
+      try {
+        const res = await fetch(
+          `/api/listing/get?category=pottery&limit=4`
+        );
+        const data = await res.json();
+        setPotteryListings(data);
+        fetchBagListings();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    
+    const fetchBagListings = async () => {
+      try {
+        const res = await fetch(
+          `/api/listing/get?category=bag&limit=4`
+        );
+        const data = await res.json();
+        setBagListings(data);
       } catch (error) {
         console.log(error);
       }
@@ -94,13 +136,13 @@ export default function Home() {
       {/* top */}
       <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
         <h1 className="text-slate-700 font-bold text-3xl lg:text-6xl">
-          Find <span className="text-slate-500">fresh</span> food in Mikie
+          Find <span className="text-slate-500">exquisite</span> stuff in Claire's Collection
         </h1>
         <div className="text-gray-400 text-xs sm:text-sm">
-          Mikie offers all kind's of groceries including seafood, meat,
-          vegetable and deli.
+          Claire's Collection offers all kind's of handmade stuff including dessert, dishes,
+          and soap.
           <br />
-          Freshness and hygiene are our priorities.
+          Make your life more ritualistic.
         </div>
         <Link
           to={"/search"}
@@ -168,13 +210,13 @@ export default function Home() {
             </Carousel>
           </div>
         )}
-        {seaFoodListings && seaFoodListings.length > 0 && (
+        {dessertListings && dessertListings.length > 0 && (
           <div className="">
             <div className="my-3">
-              <h2 className="text-2xl font-semibold text-slate-600">Seafood</h2>
+              <h2 className="text-2xl font-semibold text-slate-600">Dessert</h2>
               <Link
                 className="text-sm text-blue-800 hover:text-red-500"
-                to={"/search?category=seafood"}
+                to={"/search?category=dessert"}
               >
                 Show more
               </Link>
@@ -195,7 +237,7 @@ export default function Home() {
               dotListClass="custom-dot-list-style"
               itemClass="carousel-item-padding-40-px"
             >
-              {seaFoodListings.map((listing) => (
+              {dessertListings.map((listing) => (
                 <div className="mb-10">
                   <ListingItem listing={listing} key={listing._id} />
                 </div>
@@ -203,13 +245,13 @@ export default function Home() {
             </Carousel>
           </div>
         )}
-        {meatListings && meatListings.length > 0 && (
+        {dishListings && dishListings.length > 0 && (
           <div className="">
             <div className="my-3">
-              <h2 className="text-2xl font-semibold text-slate-600">Meat</h2>
+              <h2 className="text-2xl font-semibold text-slate-600">Dish</h2>
               <Link
                 className="text-sm text-blue-800 hover:text-red-500"
-                to={"/search?category=meat"}
+                to={"/search?category=dish"}
               >
                 Show more
               </Link>
@@ -230,7 +272,7 @@ export default function Home() {
               dotListClass="custom-dot-list-style"
               itemClass="carousel-item-padding-40-px"
             >
-              {meatListings.map((listing) => (
+              {dishListings.map((listing) => (
                 <div className="mb-10">
                   <ListingItem listing={listing} key={listing._id} />
                 </div>
@@ -238,15 +280,15 @@ export default function Home() {
             </Carousel>
           </div>
         )}
-        {vegetableListings && vegetableListings.length > 0 && (
+        {soapListings && soapListings.length > 0 && (
           <div className="">
             <div className="my-3">
               <h2 className="text-2xl font-semibold text-slate-600">
-                Vegetable
+                Soap
               </h2>
               <Link
                 className="text-sm text-blue-800 hover:text-red-500"
-                to={"/search?category=vegetable"}
+                to={"/search?category=soap"}
               >
                 Show more
               </Link>
@@ -267,7 +309,118 @@ export default function Home() {
               dotListClass="custom-dot-list-style"
               itemClass="carousel-item-padding-40-px"
             >
-              {vegetableListings.map((listing) => (
+              {soapListings.map((listing) => (
+                <div className="mb-10">
+                  <ListingItem listing={listing} key={listing._id} />
+                </div>
+              ))}
+            </Carousel>
+          </div>
+        )}
+        {lipBalmListings && lipBalmListings.length > 0 && (
+          <div className="">
+            <div className="my-3">
+              <h2 className="text-2xl font-semibold text-slate-600">
+                Lip Balm
+              </h2>
+              <Link
+                className="text-sm text-blue-800 hover:text-red-500"
+                to={"/search?category=lipbalm"}
+              >
+                Show more
+              </Link>
+            </div>
+            <Carousel
+              swipeable={true}
+              draggable={true}
+              showDots={true}
+              responsive={responsive}
+              infinite={true}
+              autoPlay={true}
+              autoPlaySpeed={4000}
+              keyBoardControl={true}
+              transitionDuration={500}
+              containerClass="carousel-container"
+              smoothScroll={true}
+              removeArrowOnDeviceType={["mobile"]}
+              dotListClass="custom-dot-list-style"
+              itemClass="carousel-item-padding-40-px"
+            >
+              {lipBalmListings.map((listing) => (
+                <div className="mb-10">
+                  <ListingItem listing={listing} key={listing._id} />
+                </div>
+              ))}
+            </Carousel>
+          </div>
+        )}
+        {potteryListings && potteryListings.length > 0 && (
+          <div className="">
+            <div className="my-3">
+              <h2 className="text-2xl font-semibold text-slate-600">
+                Pottery
+              </h2>
+              <Link
+                className="text-sm text-blue-800 hover:text-red-500"
+                to={"/search?category=pottery"}
+              >
+                Show more
+              </Link>
+            </div>
+            <Carousel
+              swipeable={true}
+              draggable={true}
+              showDots={true}
+              responsive={responsive}
+              infinite={true}
+              autoPlay={true}
+              autoPlaySpeed={4000}
+              keyBoardControl={true}
+              transitionDuration={500}
+              containerClass="carousel-container"
+              smoothScroll={true}
+              removeArrowOnDeviceType={["mobile"]}
+              dotListClass="custom-dot-list-style"
+              itemClass="carousel-item-padding-40-px"
+            >
+              {potteryListings.map((listing) => (
+                <div className="mb-10">
+                  <ListingItem listing={listing} key={listing._id} />
+                </div>
+              ))}
+            </Carousel>
+          </div>
+        )}
+        {bagListings && bagListings.length > 0 && (
+          <div className="">
+            <div className="my-3">
+              <h2 className="text-2xl font-semibold text-slate-600">
+                Bag
+              </h2>
+              <Link
+                className="text-sm text-blue-800 hover:text-red-500"
+                to={"/search?category=bag"}
+              >
+                Show more
+              </Link>
+            </div>
+            <Carousel
+              swipeable={true}
+              draggable={true}
+              showDots={true}
+              responsive={responsive}
+              infinite={true}
+              autoPlay={true}
+              autoPlaySpeed={4000}
+              keyBoardControl={true}
+              transitionDuration={500}
+              containerClass="carousel-container"
+              smoothScroll={true}
+              removeArrowOnDeviceType={["mobile"]}
+              dotListClass="custom-dot-list-style"
+              itemClass="carousel-item-padding-40-px"
+            >
+              {bagListings.map((listing) => (
                 <div className="mb-10">
                   <ListingItem listing={listing} key={listing._id} />
                 </div>

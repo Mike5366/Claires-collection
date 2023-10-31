@@ -76,7 +76,7 @@ export const getListings = async (req, res, next) => {
 
     let category = req.query.category;
     if (category === undefined || category === "all") {
-      category = { $in: ["meat", "seafood", "vegetable"] };
+      category = { $in: ["dessert", "dish", "soap", "lipbalm", "pottery", "bag"] };
     }
 
     const searchTerm = req.query.searchTerm || "";

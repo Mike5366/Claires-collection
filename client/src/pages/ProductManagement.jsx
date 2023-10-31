@@ -64,7 +64,7 @@ export default function ProductManagement() {
     }
   };
   return (
-    <main className="p-3 max-w-4xl mx-auto">
+    <main className="p-3 max-w-4xl mx-auto my-5">
       <div className="flex flex-col sm:flex-row gap-4">
         <p className="text-red-700 mt-5">
           {showListingsError ? "Error showing listings" : ""}
@@ -113,7 +113,7 @@ export default function ProductManagement() {
             className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
             to={"/create-listing"}
           >
-            Creat Product
+            Create Product
           </Link>
         </div>
       </div>

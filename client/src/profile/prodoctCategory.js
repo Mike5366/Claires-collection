@@ -1,6 +1,8 @@
 export const productCategory = [
-  { label: 'All', value:'all'},
-  { label: 'Seafood', value: 'seafood' },
-  { label: 'Meat', value: 'meat' },
-  { label: 'Vegetable', value: 'vegetable' },
+  { label: 'Dessert', value: 'dessert' },
+  { label: 'Dish', value: 'dish' },
+  { label: 'Soap', value: 'soap' },
+  { label: 'Lipbalm', value: 'lipbalm' },
+  { label: 'Pottery', value: 'pottery' },
+  { label: 'Bag', value: 'bag' },
 ];
