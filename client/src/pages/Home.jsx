@@ -181,7 +181,7 @@ export default function Home() {
               </h2>
               <Link
                 className="text-sm text-blue-800 hover:text-red-500"
-                to={"/search?category=seafood"}
+                to={"/search?offer=true"}
               >
                 Show more
               </Link>
